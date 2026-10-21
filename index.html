@@ -173,8 +173,8 @@
 
               <section class="team-section" aria-label="Elige tu equipo">
                 <div class="teams">
-                  <div class="team"><strong>team niña</strong><span>traes pañales.</span></div>
-                  <div class="team"><strong>team niño</strong><span>traes pañitos húmedos.</span></div>
+                  <div class="team"><strong>team niña</strong><span>Un detallito: pañales ♡</span></div>
+                  <div class="team"><strong>team niño</strong><span>Un detallito: pañitos húmedos ♡</span></div>
                 </div>
               </section>
 
@@ -231,7 +231,9 @@
         if (reduceMotion.matches) return;
         const viewport = stage.clientHeight || window.innerHeight;
         const letterHeight = letter.getBoundingClientRect().height;
-        const paperRise = Math.max(viewport * .14, letterHeight - viewport * .56);
+        // Keep the letter close to its original position: the envelope moves down
+        // to reveal it, while the paper itself only rises a little.
+        const paperRise = Math.min(viewport * .10, Math.max(viewport * .035, letterHeight - viewport * .88));
         const stageTop = stage.getBoundingClientRect().top;
         const currentOffset = parseFloat(getComputedStyle(collageScene).getPropertyValue('--envelope-offset')) || 0;
         const photoBottom = Math.max(...Array.from(photos.querySelectorAll('.photo'), photo => photo.getBoundingClientRect().bottom - stageTop - currentOffset));
