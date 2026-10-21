@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f3e9">
+  <meta name="description" content="Una invitación muy especial está por llegar. Acompáñanos a descubrir una nueva historia.">
+  <title>Una sorpresa está por llegar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--paper:#f7f3e9;--ink:#514a40;--butter:#f5e8a8;--butter-dark:#e5d38c;--sage:#b8b8a6;--shadow:rgba(74,63,45,.16)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scrollbar-color:var(--sage) var(--paper)}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E")}
+    a{color:inherit}
+    .topline{position:absolute;top:23px;left:0;right:0;text-align:center;font:10px "DM Mono",monospace;letter-spacing:.19em;text-transform:uppercase;opacity:.66;z-index:2}
+    .scroll-story{height:235vh;position:relative}
+    .stage{height:100vh;min-height:610px;position:sticky;top:0;display:grid;place-items:center;overflow:hidden;padding:60px 20px}
+    .corner-note{position:absolute;font:9px "DM Mono",monospace;letter-spacing:.12em;text-transform:uppercase;opacity:.55}
+    .corner-note.left{left:27px;bottom:25px;writing-mode:vertical-rl;transform:rotate(180deg)}
+    .corner-note.right{right:27px;bottom:25px;writing-mode:vertical-rl}
+    .envelope-scene{position:relative;width:min(84vw,390px);height:min(58vh,410px);min-height:330px;perspective:1200px;filter:drop-shadow(0 24px 24px var(--shadow));transform:translateY(4px);will-change:transform}
+    .envelope{position:absolute;inset:0;overflow:visible}
+    .envelope-back{position:absolute;inset:0;background:#e7d9a1;border-radius:3px}
+    .letter{position:absolute;z-index:2;left:7%;width:86%;height:108%;bottom:4%;background:#fffdf6;border:1px solid rgba(81,74,64,.12);box-shadow:0 8px 25px rgba(74,63,45,.08);padding:30px 22px 25px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;transform:translateY(44%);will-change:transform}
+    .letter-kicker{font:9px "DM Mono",monospace;letter-spacing:.17em;text-transform:uppercase;margin:5px 0 14px;opacity:.75}
+    .letter h1{font:500 clamp(35px,8vw,55px)/.98 "Playfair Display",serif;letter-spacing:-.04em;margin:0}
+    .letter h1 em{font-weight:500}
+    .letter-script{font:clamp(27px,6vw,37px) "Caveat",cursive;color:#8d8065;margin:10px 0 15px}
+    .letter-copy{font-size:11px;line-height:1.7;max-width:250px;margin:0 auto}
+    .photo-pair{display:flex;justify-content:center;gap:13px;margin:16px 0 10px}
+    .photo-placeholder{width:78px;height:88px;background:#eee8d7;padding:5px 5px 15px;transform:rotate(-5deg);box-shadow:0 4px 12px rgba(60,50,35,.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:8px "DM Mono",monospace;color:#827968}
+    .photo-placeholder:nth-child(2){transform:rotate(5deg);background:#f3e9ca}
+    .photo-placeholder svg{width:32px;height:32px;opacity:.42}
+    .paper-footer{font:8px "DM Mono",monospace;letter-spacing:.13em;text-transform:uppercase;margin-top:auto;opacity:.65}
+    .envelope-front{position:absolute;z-index:4;inset:0;pointer-events:none}
+    .env-left,.env-right,.env-bottom{position:absolute;inset:0}
+    .env-left{background:#e8d9a0;clip-path:polygon(0 0,51% 53%,0 100%)}
+    .env-right{background:#f1e5b8;clip-path:polygon(100% 0,49% 53%,100% 100%)}
+    .env-bottom{background:linear-gradient(160deg,#f1e4b4,#e6d79d);clip-path:polygon(0 100%,50% 44%,100% 100%)}
+    .flap{position:absolute;inset:0 0 auto;height:56%;z-index:5;transform-origin:top center;transform:rotateX(0deg);background:#f2e6b5;clip-path:polygon(0 0,100% 0,50% 100%);backface-visibility:visible;will-change:transform}
+    .seal{position:absolute;z-index:6;left:50%;top:46%;width:47px;height:47px;border-radius:50%;transform:translate(-50%,-50%);background:#f5e8a8;border:1px solid rgba(81,74,64,.22);display:grid;place-items:center;font:24px "Caveat",cursive;box-shadow:0 3px 7px rgba(50,40,20,.1)}
+    .envelope-hint{position:absolute;z-index:8;bottom:-48px;left:0;right:0;text-align:center;font:9px "DM Mono",monospace;letter-spacing:.15em;text-transform:uppercase;opacity:.7;animation:bob 2s ease-in-out infinite;white-space:nowrap}
+    @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+    .decor{position:absolute;border:1px solid rgba(184,184,166,.55);border-radius:50%;pointer-events:none}
+    .decor.one{width:160px;height:160px;top:16%;left:-80px}
+    .decor.two{width:240px;height:240px;right:-140px;bottom:12%}
+    .details{position:relative;background:var(--butter);padding:105px 22px 95px;text-align:center;min-height:88vh;display:flex;align-items:center;justify-content:center}
+    .details-inner{width:min(100%,640px);margin:auto}
+    .eyebrow{font:9px "DM Mono",monospace;letter-spacing:.18em;text-transform:uppercase;opacity:.7}
+    .details h2{font:500 clamp(38px,8vw,66px)/1.03 "Playfair Display",serif;letter-spacing:-.04em;margin:22px 0}
+    .details p{line-height:1.8;font-size:13px;max-width:430px;margin:0 auto 28px}
+    .event-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:34px auto;max-width:490px}
+    .event-item{border-top:1px solid rgba(81,74,64,.35);padding:17px 8px 10px}
+    .event-item span{display:block;font:9px "DM Mono",monospace;letter-spacing:.13em;text-transform:uppercase;opacity:.68;margin-bottom:9px}
+    .event-item strong{font:500 18px "Playfair Display",serif}
+    .actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:30px}
+    .btn{border:1px solid var(--ink);padding:13px 18px;min-width:160px;text-decoration:none;font-size:10px;letter-spacing:.08em;text-transform:uppercase;transition:background .25s,color .25s;cursor:pointer;background:transparent;color:var(--ink)}
+    .btn.primary{background:var(--ink);color:var(--paper)}
+    .btn:hover{background:#fffdf5;color:var(--ink)}
+    .closing{padding:62px 20px;text-align:center;background:var(--paper)}
+    .closing p{font:italic 500 clamp(24px,5vw,36px) "Playfair Display",serif;margin:0 0 12px}
+    .closing small{font:9px "DM Mono",monospace;letter-spacing:.17em;text-transform:uppercase;opacity:.65}
+    @media(min-width:760px){.scroll-story{height:250vh}.envelope-scene{width:390px;height:410px}.letter{padding:34px 28px 28px}.photo-placeholder{width:84px;height:94px}}
+    @media(max-width:480px){.stage{min-height:570px;padding:50px 16px}.envelope-scene{width:min(88vw,350px);height:370px;min-height:350px}.letter{padding:26px 16px 22px}.letter-copy{font-size:10px}.photo-pair{margin:14px 0 9px}.photo-placeholder{width:70px;height:80px}.corner-note.left{left:9px;bottom:17px}.corner-note.right{right:9px;bottom:17px}.event-grid{gap:4px}.btn{width:100%;max-width:270px}.details{padding:78px 20px}.topline{top:17px;font-size:8px;letter-spacing:.13em}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.envelope-hint{animation:none}}
+  </style>
+</head>
+<body>
+  <div class="topline">Una pequeña gran sorpresa · Invitación especial</div>
+  <section class="scroll-story" id="inicio" aria-label="Sobre animado">
+    <div class="stage">
+      <div class="decor one"></div><div class="decor two"></div>
+      <div class="corner-note left">Un nuevo capítulo comienza</div>
+      <div class="corner-note right">Hecho con amor</div>
+      <div class="envelope-scene" id="envelopeScene">
+        <div class="envelope">
+          <div class="envelope-back"></div>
+          <article class="letter" id="letter">
+            <div class="letter-kicker">Con muchísima ilusión</div>
+            <h1>Una nueva<br><em>historia</em></h1>
+            <div class="letter-script">está por comenzar…</div>
+            <p class="letter-copy">Hay secretos que hacen latir el corazón un poquito más rápido. Queremos compartir contigo uno de los momentos más especiales de nuestras vidas.</p>
+            <div class="photo-pair" aria-label="Espacios para fotos de los papás cuando eran bebés">
+              <div class="photo-placeholder"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="13" r="7"/><path d="M7 35c1-9 6-13 13-13s12 4 13 13"/></svg>FOTO 01</div>
+              <div class="photo-placeholder"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="20" cy="13" r="7"/><path d="M7 35c1-9 6-13 13-13s12 4 13 13"/></svg>FOTO 02</div>
+            </div>
+            <div class="paper-footer">Nuestro pequeño gran misterio</div>
+          </article>
+          <div class="envelope-front"><div class="env-left"></div><div class="env-right"></div><div class="env-bottom"></div></div>
+          <div class="flap" id="flap"></div>
+          <div class="seal" id="seal">♡</div>
+        </div>
+        <div class="envelope-hint" id="hint">Desliza para abrir la carta ↓</div>
+      </div>
+    </div>
+  </section>
+  <section class="details" id="detalles">
+    <div class="details-inner">
+      <div class="eyebrow">Nos encantaría compartirlo contigo</div>
+      <h2>¿Niño o niña?</h2>
+      <p>Una personita está por cambiar nuestro mundo para siempre. Acompáñanos a descubrir quién viene en camino y a celebrar este nuevo capítulo con nosotros.</p>
+      <div class="event-grid">
+        <div class="event-item"><span>Fecha</span><strong>Próximamente</strong></div>
+        <div class="event-item"><span>Hora</span><strong>Por confirmar</strong></div>
+        <div class="event-item"><span>Lugar</span><strong>Por confirmar</strong></div>
+        <div class="event-item"><span>Vestimenta</span><strong>Ven como eres</strong></div>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="https://wa.me/?text=Hola%2C%20quiero%20confirmar%20mi%20asistencia%20a%20la%20revelaci%C3%B3n%20de%20g%C3%A9nero." target="_blank" rel="noopener">Confirmar por WhatsApp</a>
+        <a class="btn" href="#inicio">Volver al sobre ↑</a>
+      </div>
+    </div>
+  </section>
+  <footer class="closing"><p>Lo más bonito está por llegar.</p><small>Gracias por ser parte de nuestra historia</small></footer>
+  <script>
+    (()=>{
+      const story=document.querySelector('.scroll-story'),scene=document.getElementById('envelopeScene'),letter=document.getElementById('letter'),flap=document.getElementById('flap'),seal=document.getElementById('seal'),hint=document.getElementById('hint');
+      const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;let ticking=false;
+      function update(){
+        const rect=story.getBoundingClientRect(),travel=Math.max(1,story.offsetHeight-window.innerHeight),progress=Math.max(0,Math.min(1,-rect.top/travel)),smooth=progress*progress*(3-2*progress);
+        letter.style.transform='translateY('+(44-117*smooth)+'%)';
+        flap.style.transform='rotateX('+(smooth*178)+'deg)';
+        seal.style.opacity=String(Math.max(0,1-smooth*2.7));seal.style.transform='translate(-50%,-50%) scale('+(1-smooth*.25)+')';
+        scene.style.transform='translateY('+(4-8*smooth)+'px)';
+        hint.textContent=progress<.12?'Desliza para abrir la carta ↓':progress<.78?'Un pequeño secreto está por salir…':'Sigue bajando para descubrir la invitación ↓';ticking=false;
+      }
+      if(reduced){letter.style.transform='translateY(2%)';flap.style.transform='rotateX(155deg)';seal.style.opacity='0';hint.textContent='La invitación te espera abajo ↓';}
+      else{window.addEventListener('scroll',()=>{if(!ticking){window.requestAnimationFrame(update);ticking=true;}},{passive:true});window.addEventListener('resize',update);update();}
+    })();
+  </script>
+</body>
+</html>
